@@ -6,10 +6,10 @@ if [ $1 = 0 ] ; then
                 /usr/bin/systemctl disable mariadb.service > /dev/null 2>&1
         fi
         if [ -x %{_sysconfdir}/init.d/mysql ] ; then
-                %{_sysconfdir}/init.d/mysql stop > /dev/null
-        fi
-        if [ -x /sbin/chkconfig ] ; then
-                /sbin/chkconfig --del mysql > /dev/null 2>&1
+                if [ -x /sbin/chkconfig ] ; then
+                        /sbin/chkconfig --del mysql > /dev/null 2>&1
+                fi
+                %{_sysconfdir}/init.d/mysql stop > /dev/null 2>&1
         fi
 fi
 
